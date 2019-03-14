@@ -119,7 +119,7 @@ self.title = "Car Details"
         "createdDate":today,
         "modifiedBy":"ios",
         "modifiedDate":today,
-        "isActive":"y",
+        "isActive":"yes",
     ] as Dictionary<String, AnyObject>
     
     print(parameters)
