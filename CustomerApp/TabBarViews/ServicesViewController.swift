@@ -32,9 +32,6 @@ class ServicesViewController: UIViewController , UICollectionViewDelegate, UICol
         
         collectionView.backgroundColor = UIColor.lightGray
         NotificationCenter.default.addObserver(self, selector: #selector(helloReceived), name: NSNotification.Name("Hello"), object: nil)
-        
-        
-        
     }
     
     @objc func helloReceived(notifiction: Notification){

@@ -20,14 +20,13 @@ class TabBarVC: UITabBarController , UITabBarControllerDelegate{
         let image = UIImage(named: "nav-icon")?.withRenderingMode(.alwaysOriginal)
         let button1 = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.ShowMenuDrawer)) // action:#selector(Class.MethodName) for swift 3
         self.navigationItem.leftBarButtonItem  = button1
-        
         changebarcolor()
         self.delegate = self
 
     }
     override func viewWillAppear(_ animated: Bool) {
+        
         checkNetworkReachability()
-
         selectedIndex = 0
         
     }

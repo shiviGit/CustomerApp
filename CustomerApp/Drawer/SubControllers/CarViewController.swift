@@ -61,10 +61,112 @@ self.title = "Car Details"
     }
 
     @IBAction func RCUpload(_ sender: Any) {
-        self.uploadImg(image: #imageLiteral(resourceName: "6"))
+   
+        /////encoding////
+        //Use image name from bundle to create NSData
+        let image : UIImage = UIImage(named: "logo_in_1")!
+        //Now use image to create into NSData format
+        let imageData:NSData = image.pngData()! as NSData
+        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        print(strBase64)
+        self.uploadbase64str(strBase64: strBase64 , strtype: "RC")
+        
+        /////decoding////
+        let dataDecoded:NSData = NSData(base64Encoded: strBase64, options: NSData.Base64DecodingOptions(rawValue: 0))!
+        let decodedimage:UIImage = UIImage(data: dataDecoded as Data)!
+        print(decodedimage)
+        //yourImageView.image = decodedimage
+
    }
+    func getTodayString() -> String{
+        
+        let date = Date()
+        let calender = Calendar.current
+        let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+        let year = components.year
+        let month = components.month
+        let day = components.day
+        let hour = components.hour
+        let minute = components.minute
+        let second = components.second
+        let today_string = String(year!) + "-" + String(month!) + "-" + String(day!) + " " + String(hour!)  + ":" + String(minute!) + ":" +  String(second!)
+        return today_string
+        
+    }
+
+    func uploadbase64str(strBase64:String , strtype:String)  {
+    
+    NetworkManager.isUnreachable { networkManagerInstance in
+    print("Network is Unavailable")
+    let ac = UIAlertController(title: "No Internet.", message: "you are offline. Please  connect to the internet.", preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default))
+    self.present(ac, animated: true)
+    
+    return
+    }
+    NetworkManager.isReachable { networkManagerInstance in
+    print("Network is available")
+    
+    let today = self.getTodayString()
+    let parameters = [
+    "mobile":AppDelegate.SharedInstance.MobileNoOfUSer,
+    "numberPlate":"MH-12 AB 5678",
+    "email":"abc@carok.in",
+    "imageType":strtype,
+    "imageName":"RC123.jpg",
+    "imageString":strBase64,
+        "createdBy":"ios",
+        "createdDate":today,
+        "modifiedBy":"ios",
+        "modifiedDate":today,
+        "isActive":"y",
+    ] as Dictionary<String, AnyObject>
+    
+    print(parameters)
+    
+    let url : String = String(format: "%@/Upload/txnImage", AppDelegate.SharedInstance.URLAddress)//server new url
+    //            let url : String = String(format: "%@/alien/alien/sendOtp", AppDelegate.SharedInstance.URLAddress)//server old url
+    
+    print(url)
+    self.ShowLoader()
+    Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+    
+    .responseJSON { response in
+    self.HideLoader()
+    
+    switch response.result
+    {
+    
+    case .failure(let error):
+    if let data = response.data {
+    print("Print Server Error: " + String(data: data, encoding: String.Encoding.utf8)!)
+    }
+    let ac = UIAlertController(title: "Server not Found", message: error as? String, preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default))
+    self.present(ac, animated: true)
+    print(error)
+    
+    case .success(let value):
+    
+    print(value)
+    let mydict = value as! Dictionary<String,Any>
+    print(mydict)
+//    let ac = UIAlertController(title: "", message: String(format: "OTP Sent On Mobile NO. %@", AppDelegate.SharedInstance.MobileNoOfUSer), preferredStyle: .alert)
+//    ac.addAction(UIAlertAction(title: "OK", style: .default))
+//    self.present(ac, animated: true)
+    }
+    }
+    .responseString { response in
+    
+    print(response)
+    }
+    }
+    }
+    
     @IBAction func InsurUpload(_ sender: Any) {
-        self.uploadImg(image: #imageLiteral(resourceName: "6"))
+       
+       // self.uploadImg(image: #imageLiteral(resourceName: "6"))
+        
  }
     @IBAction func clicked(_ sender: Any) {
             
@@ -402,7 +504,6 @@ self.title = "Car Details"
                 if(self.model.count==0)
                 {
                     self.tblList.isHidden=true
-                    
                 }
 
                 }
