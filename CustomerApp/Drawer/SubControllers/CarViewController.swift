@@ -110,10 +110,10 @@ self.title = "Car Details"
     let today = self.getTodayString()
     let parameters = [
     "mobile":AppDelegate.SharedInstance.MobileNoOfUSer,
-    "numberPlate":"MH-12 AB 5678",
-    "email":"abc@carok.in",
+    "numberPlate":"",
+    "email":"",
     "imageType":strtype,
-    "imageName":"RC123.jpg",
+    "imageName":"",
     "imageString":strBase64,
         "createdBy":"ios",
         "createdDate":today,
