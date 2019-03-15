@@ -687,74 +687,74 @@ extension CarViewController : UIImagePickerControllerDelegate , UINavigationCont
     
     
     
-    func uploadImg(image: UIImage) {
-        
-       // let image = UIImage.init(named: "myImage")
-        
-        let imgData = image.jpegData(compressionQuality: 0.2)
-
-        let url = "http://carokay.in:8082/D:/PulseLiveImages"
-        let parameters = ["user":"Images", "password":"images@pulse"]
-
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imgData!, withName: "fileset",fileName: "file.jpg", mimeType: "image/jpg")
-            for (key, value) in parameters {
-                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-            } //Optional for extra parameters
-        },
-                         to:url)
-        { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                
-                upload.uploadProgress(closure: { (progress) in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                })
-                
-                upload.responseJSON { response in
-                    print(response.result.value as Any )
-                }
-                upload.responseString { response in
-                    print(response.result.value as Any )
-                }
-
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        }
-
-        
-//        // User "authentication":
-//           let parameters = ["user":"Images", "password":"images@pulse"]
+//    func uploadImg(image: UIImage) {
+//        
+//       // let image = UIImage.init(named: "myImage")
+//        
+//        let imgData = image.jpegData(compressionQuality: 0.2)
 //
-//            // Image to upload:
-//           let imageToUploadURL = Bundle.main.url(forResource: "userprofile", withExtension: "png")
+//        let url = "http://carokay.in:8082/D:/PulseLiveImages"
+//        let parameters = ["user":"Images", "password":"images@pulse"]
 //
-//        // Server address (replace this with the address of your own server):
+//        Alamofire.upload(multipartFormData: { multipartFormData in
+//            multipartFormData.append(imgData!, withName: "fileset",fileName: "file.jpg", mimeType: "image/jpg")
+//            for (key, value) in parameters {
+//                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+//            } //Optional for extra parameters
+//        },
+//                         to:url)
+//        { (result) in
+//            switch result {
+//            case .success(let upload, _, _):
+//                
+//                upload.uploadProgress(closure: { (progress) in
+//                    print("Upload Progress: \(progress.fractionCompleted)")
+//                })
+//                
+//                upload.responseJSON { response in
+//                    print(response.result.value as Any )
+//                }
+//                upload.responseString { response in
+//                    print(response.result.value as Any )
+//                }
 //
-//         let url = "http://carokay.in:8082/D:/PulseLiveImages"
+//            case .failure(let encodingError):
+//                print(encodingError)
+//            }
+//        }
 //
-//             // Use Alamofire to upload the image
-//             Alamofire.upload(
-//                     multipartFormData: { multipartFormData in
-//                             multipartFormData.append(imageToUploadURL!, withName: "9039358803")
-//                             for (key, val) in parameters {
-//                                     multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
-//                                 }
-//                     },
-//                 to: url,
-//                     encodingCompletion: { encodingResult in
-//                         switch encodingResult {
-//                         case .success(let upload, _, _):
-//                             upload.responseJSON { response in
-//                                 if let jsonResponse = response.result.value as? [String: Any] {
-//                                     print(jsonResponse)
-//                                 }
-//                             }
-//                         case .failure(let encodingError):
-//                             print(encodingError)
-//                         }
-//                 }
-//                 )
-    }
+//        
+////        // User "authentication":
+////           let parameters = ["user":"Images", "password":"images@pulse"]
+////
+////            // Image to upload:
+////           let imageToUploadURL = Bundle.main.url(forResource: "userprofile", withExtension: "png")
+////
+////        // Server address (replace this with the address of your own server):
+////
+////         let url = "http://carokay.in:8082/D:/PulseLiveImages"
+////
+////             // Use Alamofire to upload the image
+////             Alamofire.upload(
+////                     multipartFormData: { multipartFormData in
+////                             multipartFormData.append(imageToUploadURL!, withName: "9039358803")
+////                             for (key, val) in parameters {
+////                                     multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
+////                                 }
+////                     },
+////                 to: url,
+////                     encodingCompletion: { encodingResult in
+////                         switch encodingResult {
+////                         case .success(let upload, _, _):
+////                             upload.responseJSON { response in
+////                                 if let jsonResponse = response.result.value as? [String: Any] {
+////                                     print(jsonResponse)
+////                                 }
+////                             }
+////                         case .failure(let encodingError):
+////                             print(encodingError)
+////                         }
+////                 }
+////                 )
+//    }
 }
