@@ -15,7 +15,7 @@ class CarViewController: UIViewController , UITableViewDelegate , UITableViewDat
     @IBOutlet weak var tffuletype: UITextField!
     
     @IBOutlet weak var tfcarmodel: UITextField!
-    var Fuel  : [String]  = ["Maruti", "Suzuki", "TATA"]
+    var Fuel  : [String]  = ["Petrol", "Desel", "CNG"]
     var brand : [String]  = ([] as NSMutableArray) as! [String]
     var model : [String]  = []
     let cellReuseIdentifier = "cell"
