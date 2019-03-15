@@ -72,9 +72,9 @@ self.title = "Car Details"
         self.uploadbase64str(strBase64: strBase64 , strtype: "RC")
         
         /////decoding////
-        let dataDecoded:NSData = NSData(base64Encoded: strBase64, options: NSData.Base64DecodingOptions(rawValue: 0))!
-        let decodedimage:UIImage = UIImage(data: dataDecoded as Data)!
-        print(decodedimage)
+        //        let dataDecoded:NSData = NSData(base64Encoded: strBase64, options: NSData.Base64DecodingOptions(rawValue: 0))!
+        //        let decodedimage:UIImage = UIImage(data: dataDecoded as Data)!
+        //        print(decodedimage)
         //yourImageView.image = decodedimage
 
    }
