@@ -115,9 +115,9 @@ self.title = "Car Details"
     "imageType":strtype,
     "imageName":"",
     "imageString":strBase64,
-        "createdBy":"ios",
+        "createdBy":"iosApp",
         "createdDate":today,
-        "modifiedBy":"ios",
+        "modifiedBy":"iosApp",
         "modifiedDate":today,
         "isActive":"yes",
     ] as Dictionary<String, AnyObject>
