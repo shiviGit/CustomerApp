@@ -115,11 +115,11 @@ self.title = "Car Details"
     "imageType":strtype,
     "imageName":"",
     "imageString":strBase64,
-        "createdBy":"iosApp",
-        "createdDate":today,
-        "modifiedBy":"iosApp",
-        "modifiedDate":today,
-        "isActive":"yes",
+    "createdBy":"iosApp",
+    "createdDate":today,
+    "modifiedBy":"iosApp",
+    "modifiedDate":today,
+    "isActive":"yes",
     ] as Dictionary<String, AnyObject>
     
     print(parameters)
